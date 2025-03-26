@@ -5,10 +5,7 @@ import com.platzi.platzi_api_jpa.service.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,4 +30,29 @@ public class PizzaController {
         return ResponseEntity.ok(pizzaService.getById(id));
     }
 
+    @PostMapping("/")
+    public ResponseEntity<PizzaEntity> save(@RequestBody PizzaEntity pizzaEntity){
+
+        if(pizzaEntity.getIdPizza() == null || pizzaService.existsById(pizzaEntity.getIdPizza())){
+            return ResponseEntity.ok(pizzaService.save(pizzaEntity));
+        }
+        return ResponseEntity.badRequest().build();
+    }
+
+    @PutMapping("/")
+    public ResponseEntity<PizzaEntity> update(@RequestBody PizzaEntity pizzaEntity){
+        if(pizzaEntity.getIdPizza() != null && pizzaService.existsById(pizzaEntity.getIdPizza())){
+            return ResponseEntity.ok(pizzaService.save(pizzaEntity));
+        }
+        return ResponseEntity.badRequest().build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable int id){
+        if(pizzaService.existsById(id)){
+            pizzaService.delte(id);
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.badRequest().build();
+    }
 }

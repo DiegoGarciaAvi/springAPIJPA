@@ -27,4 +27,21 @@ public class PizzaService {
         return pizzaRepository.findById(id).orElse(null);
     }
 
+    public PizzaEntity save (PizzaEntity pizzaEntity){
+        try {
+            return pizzaRepository.save(pizzaEntity);
+        } catch (Exception e){
+            System.out.println("----------\n"+e);
+            return null;
+        }
+    }
+
+    public void delte(int id){
+        pizzaRepository.deleteById(id);
+    }
+
+    public boolean existsById(int id){
+        return pizzaRepository.existsById(id);
+    }
+
 }
