@@ -25,9 +25,29 @@ public class PizzaController {
         return ResponseEntity.ok(pizzaService.getAll());
     }
 
+    @GetMapping("/available")
+    public ResponseEntity<List<PizzaEntity>> getAvailable(){
+        return ResponseEntity.ok((pizzaService.getAvailable()));
+    }
+
+    @GetMapping("/with/{description}")
+    public ResponseEntity<List<PizzaEntity>> getWithDescription(@PathVariable String description){
+        return ResponseEntity.ok(pizzaService.getWithDescription(description));
+    }
+
+    @GetMapping("/without/{description}")
+    public ResponseEntity<List<PizzaEntity>> getWithoutDescription(@PathVariable String description){
+        return ResponseEntity.ok(pizzaService.getWithoutDescription(description));
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<PizzaEntity> getById(@PathVariable int id){
         return ResponseEntity.ok(pizzaService.getById(id));
+    }
+
+    @GetMapping("/name/{name}")
+    public ResponseEntity<PizzaEntity> getByName(@PathVariable String name){
+        return ResponseEntity.ok(pizzaService.getByName(name));
     }
 
     @PostMapping("/")
