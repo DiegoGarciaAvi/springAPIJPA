@@ -1,5 +1,6 @@
 package com.platzi.platzi_api_jpa.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,6 +33,7 @@ public class OrderItemEntity {
 
     @ManyToOne
     @JoinColumn(name = "id_order",columnDefinition = "id_order",insertable = false,updatable = false)
+    @JsonIgnore
     private PizzaOrderEntity pizzaOrder;
 
     @OneToOne

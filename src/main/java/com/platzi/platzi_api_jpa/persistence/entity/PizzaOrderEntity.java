@@ -1,5 +1,6 @@
 package com.platzi.platzi_api_jpa.persistence.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.*;
 import jakarta.persistence.Table;
@@ -37,11 +38,12 @@ public class PizzaOrderEntity {
     @Column(name = "additional_notes",length = 200)
     private String additionalNotes;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_customer",columnDefinition = "id_customer",insertable = false,updatable = false)
+    @JsonIgnore
     private CustomerEntity customer;
 
-    @OneToMany(mappedBy = "pizzaOrder")
+    @OneToMany(mappedBy = "pizzaOrder", fetch = FetchType.EAGER)
     private List<OrderItemEntity> items;
 
 
