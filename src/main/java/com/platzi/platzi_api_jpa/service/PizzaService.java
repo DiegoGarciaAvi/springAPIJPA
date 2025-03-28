@@ -3,8 +3,6 @@ package com.platzi.platzi_api_jpa.service;
 import com.platzi.platzi_api_jpa.persistence.entity.PizzaEntity;
 import com.platzi.platzi_api_jpa.persistence.repository.PizzaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -41,7 +39,11 @@ public class PizzaService {
     }
 
     public PizzaEntity getByName(String name){
-        return pizzaRepository.findByAvailableTrueAndNameIgnoreCase(name);
+        return pizzaRepository.findFirstByAvailableTrueAndNameIgnoreCase(name).orElseThrow(() -> new RuntimeException("Pizza not found"));
+    }
+
+    public List<PizzaEntity> getByPrice(double price){
+        return pizzaRepository.findTop3ByAvailableTrueAndPriceLessThanEqualOrderByPriceAsc(price);
     }
 
     public PizzaEntity save (PizzaEntity pizzaEntity){

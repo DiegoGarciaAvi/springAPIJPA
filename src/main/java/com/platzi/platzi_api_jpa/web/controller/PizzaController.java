@@ -50,6 +50,11 @@ public class PizzaController {
         return ResponseEntity.ok(pizzaService.getByName(name));
     }
 
+    @GetMapping("/price/{price}")
+    public ResponseEntity<List<PizzaEntity>> getByPrice(@PathVariable double price){
+        return ResponseEntity.ok((pizzaService.getByPrice(price)));
+    }
+
     @PostMapping("/")
     public ResponseEntity<PizzaEntity> save(@RequestBody PizzaEntity pizzaEntity){
 
