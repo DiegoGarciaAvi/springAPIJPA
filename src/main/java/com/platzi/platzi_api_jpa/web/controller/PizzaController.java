@@ -3,8 +3,8 @@ package com.platzi.platzi_api_jpa.web.controller;
 import com.platzi.platzi_api_jpa.persistence.entity.PizzaEntity;
 import com.platzi.platzi_api_jpa.service.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,8 +21,9 @@ public class PizzaController {
     }
 
     @GetMapping
-    public ResponseEntity<List<PizzaEntity>> getAll(){
-        return ResponseEntity.ok(pizzaService.getAll());
+    public ResponseEntity<Page<PizzaEntity>> getAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "8") int elements){
+
+        return ResponseEntity.ok(pizzaService.getAll(page,elements));
     }
 
     @GetMapping("/available")
