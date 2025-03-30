@@ -1,9 +1,15 @@
 package com.platzi.platzi_api_jpa.persistence.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "customer")
+@Getter
+@Setter
+@NoArgsConstructor
 public class CustomerEntity {
 
     @Id
