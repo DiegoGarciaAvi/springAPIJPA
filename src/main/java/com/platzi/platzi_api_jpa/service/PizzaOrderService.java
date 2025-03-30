@@ -3,7 +3,6 @@ package com.platzi.platzi_api_jpa.service;
 import com.platzi.platzi_api_jpa.persistence.entity.PizzaOrderEntity;
 import com.platzi.platzi_api_jpa.persistence.repository.PizzaOrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -38,6 +37,10 @@ public class PizzaOrderService {
 
         List<String> methods= List.of("D", "S");
         return pizzaOrderRepository.findAllByMethodIn(methods);
+    }
+
+    public List<PizzaOrderEntity> findCustomerOrders(String id_customer){
+        return pizzaOrderRepository.findCustomerOrders(id_customer);
     }
 
 }
