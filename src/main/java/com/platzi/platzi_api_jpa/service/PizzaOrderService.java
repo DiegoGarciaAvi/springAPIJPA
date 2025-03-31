@@ -1,6 +1,7 @@
 package com.platzi.platzi_api_jpa.service;
 
 import com.platzi.platzi_api_jpa.persistence.entity.PizzaOrderEntity;
+import com.platzi.platzi_api_jpa.persistence.proyection.OrderSummary;
 import com.platzi.platzi_api_jpa.persistence.repository.PizzaOrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,6 +42,10 @@ public class PizzaOrderService {
 
     public List<PizzaOrderEntity> findCustomerOrders(String id_customer){
         return pizzaOrderRepository.findCustomerOrders(id_customer);
+    }
+
+    public OrderSummary getSummary(int order_id){
+        return pizzaOrderRepository.findSummary(order_id);
     }
 
 }
