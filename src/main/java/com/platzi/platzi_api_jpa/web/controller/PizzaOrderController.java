@@ -3,6 +3,7 @@ package com.platzi.platzi_api_jpa.web.controller;
 import com.platzi.platzi_api_jpa.persistence.entity.PizzaOrderEntity;
 import com.platzi.platzi_api_jpa.persistence.proyection.OrderSummary;
 import com.platzi.platzi_api_jpa.service.PizzaOrderService;
+import com.platzi.platzi_api_jpa.service.dto.RandomOrderDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,6 +43,11 @@ public class PizzaOrderController {
     @GetMapping("/order_summary/{order_id}")
     public ResponseEntity<OrderSummary> getSummary(@PathVariable int order_id){
         return ResponseEntity.ok(pizzaOrderService.getSummary(order_id));
+    }
+
+    @PostMapping("/random")
+    public ResponseEntity<Boolean> randomOrder(@RequestBody RandomOrderDto dto) {
+        return ResponseEntity.ok(this.pizzaOrderService.saveRandomOrder(dto));
     }
 
 }
