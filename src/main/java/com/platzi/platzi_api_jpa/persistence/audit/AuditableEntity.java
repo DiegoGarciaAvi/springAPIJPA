@@ -1,4 +1,4 @@
-package com.platzi.platzi_api_jpa.persistence.entity;
+package com.platzi.platzi_api_jpa.persistence.audit;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;

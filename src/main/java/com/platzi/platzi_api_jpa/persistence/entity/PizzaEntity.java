@@ -1,5 +1,7 @@
 package com.platzi.platzi_api_jpa.persistence.entity;
 
+import com.platzi.platzi_api_jpa.persistence.audit.AuditPizzaListener;
+import com.platzi.platzi_api_jpa.persistence.audit.AuditableEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,14 +9,16 @@ import lombok.Setter;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.io.Serializable;
+
 
 @Entity
 @Table(name = "pizza")
 @Getter
 @Setter
 @NoArgsConstructor
-@EntityListeners(AuditingEntityListener.class)
-public class PizzaEntity extends AuditableEntity {
+@EntityListeners({AuditingEntityListener.class, AuditPizzaListener.class})
+public class PizzaEntity extends AuditableEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,4 +39,17 @@ public class PizzaEntity extends AuditableEntity {
     private Boolean vegan;
 
     private Boolean available;
+
+    @Override
+    public String toString() {
+        return "PizzaEntity{" +
+                "idPizza=" + idPizza +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", vegetarian=" + vegetarian +
+                ", vegan=" + vegan +
+                ", available=" + available +
+                '}';
+    }
 }
