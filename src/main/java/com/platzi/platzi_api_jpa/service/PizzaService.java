@@ -3,12 +3,14 @@ package com.platzi.platzi_api_jpa.service;
 import com.platzi.platzi_api_jpa.persistence.entity.PizzaEntity;
 import com.platzi.platzi_api_jpa.persistence.repository.PizzaPagSortRepository;
 import com.platzi.platzi_api_jpa.persistence.repository.PizzaRepository;
+import com.platzi.platzi_api_jpa.service.dto.UpdatePizzaPriceDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -68,6 +70,12 @@ public class PizzaService {
     public void delte(int id){
         pizzaRepository.deleteById(id);
     }
+
+    @Transactional
+    public void  updatePrice(UpdatePizzaPriceDto updatePizzaPriceDto){
+        pizzaRepository.updatePrice(updatePizzaPriceDto);
+    }
+
 
     public boolean existsById(int id){
         return pizzaRepository.existsById(id);
